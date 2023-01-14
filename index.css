@@ -22,9 +22,8 @@ body {
 .restaurant-list {
   padding: 10px 25px;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 25px;
+  gap:50px;
   border: 1px solid rgb(136, 181, 196);
 }
 
