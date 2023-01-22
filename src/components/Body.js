@@ -1,55 +1,80 @@
-import { restaurantList } from "../config";
 import RestaurantCard from "./RestaurantCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
+import {SearchSvg} from '../assets/SVG'
 
-// What is state
-// what is React Hooks? - functions,
-// What is useState
-
-function filterData(searchText, restaurants) {
+const filterDataFn = (searchTxt, restaurants) => {
   const filterData = restaurants.filter((restaurant) =>
-    restaurant.data.name.includes(searchText)
+    restaurant.data.name.toLowerCase().includes(searchTxt.toLowerCase())
   );
-
   return filterData;
-}
+};
 
 const Body = () => {
-  const [restaurants, setRestaurants] = useState(restaurantList);
-  const [searchText, setSearchText] = useState("");
-  //console.log(restaurants);
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setfilteredRestaurants] = useState([]);
+  const [searchTxt, setSearchTxt] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9354765&lng=77.6141533&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+    console.log(json);
+    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards); // * ***optional chaining********
+    setfilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setIsLoading(false);
+  }
+
+  {
+    console.log("render");
+  }
+
   return (
     <>
       <div className="search-container">
         <input
           type="text"
-          className="search-input"
-          placeholder="Search"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
+          value={searchTxt}
+          onChange={(e) => setSearchTxt(e.target.value)}
+          placeholder="Search for restaurants and food"
         />
         <button
           className="search-btn"
           onClick={() => {
-            //need to filter the data
-            const data = filterData(searchText, restaurants);
+            // need to filter restaurant list data
+            const data = filterDataFn(searchTxt, allRestaurants);
             // update the state - restaurants
-            setRestaurants(data);
+            setfilteredRestaurants(data);
+            setSearchTxt("");            
+            setIsLoading(false);
           }}
         >
-          Search
+          Search          
+          <SearchSvg />
         </button>
       </div>
-      <div className="restaurant-list">
-        {restaurants.map((restaurant) => (
-          <RestaurantCard
-            restaurantInfo={restaurant}
-            key={restaurant.data.id}
-          />
-        ))}
-      </div>
+
+
+      {isLoading && <Shimmer />}
+
+      {!isLoading && filteredRestaurants.length === 0 ? (
+        <h3>Not Found!</h3>
+      ) : (
+        <div className="restaurant-list">
+          {filteredRestaurants.map((restaurant) => (
+            <RestaurantCard
+              restaurantInfo={restaurant}
+              key={restaurant.data.id}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };

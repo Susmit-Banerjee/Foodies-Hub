@@ -1,39 +1,160 @@
-body {
+* {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 25px;
-  border: 1px solid rgb(136, 181, 196);
-}
-.nav-items > ul {
-  list-style-type: none;
-  display: flex;
+  font-family: "PT Sans", Calibri, Tahoma, sans-serif;
 }
 
-.nav-items > ul > li {
-  padding: 10px;
+/***************************************************** HEADER STYLE ***************************************************/
+.header {
+  height: 80px;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgb(177, 177, 177);
 }
 .logo {
   width: 80px;
+  height: 100%;
+}
+.nav-list-items {
+  height: 100%;
+  flex: 1;
+}
+.nav-list-items > ul {
+  list-style-type: none;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.nav-list-items > ul > li {
+  height: 100%;
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+}
+.nav-icon {
+  display: flex;
+  align-items: center;
+  font-size: large;
+  column-gap: 10px;
+}
+.nav-icon:hover {
+  color: #ffc300;
 }
 
+/************************************************* BODY COMPONENT STYLE *****************************************************/
+
+/************* SEARCH BAR STYLE ******************/
+.search-container {
+  width: 50%;
+  height: 2rem;
+  padding: 0 5%;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+.search-container > input {
+  background-color: #f5f5f5;
+  font-size: large;
+  padding: 0 10px;
+  flex: 1;
+  border: 2px solid #ffd036;
+  outline: #ffd036;
+}
+
+.search-btn {
+  font-size: large;
+  color: #666666;
+  width: 20%;
+  border: 2px solid #ffd036;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.search-btn:hover {
+  color: #ffd036;
+}
+
+/************* RESTAURANT SECTION STYLES*********/
 .restaurant-list {
-  padding: 10px 25px;
+  width: 90%;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
-  gap:50px;
-  border: 1px solid rgb(136, 181, 196);
+  gap: 3rem 4%;
 }
 
 .card {
-  width: 250px;
-  border: 1px solid rgb(136, 181, 196);
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px rgb(177, 175, 175);
+  width: 22%;  
+  min-height: 20rem;
+  box-shadow: 2px 2px 10px rgb(177, 175, 175);
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
 .card > img {
   width: 100%;
+}
+.card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.restaurant-name {
+  font-size: large;
+  font-weight: bold;
+  word-spacing: 2px;
+  min-height: 30%;
+  display: flex;
+  align-items: center;
+}
+.cuisines {
+  color: #686b78;
+  font-size: medium;
+  min-height: 50%;
+  display: flex;
+  align-items: center;
+}
+.card-details > div {
+  display: flex;
+  justify-content: space-between;
+  min-height: 20%;
+  align-items: center;
+}
+
+/********************************************** SHIMMER UI *************************************************************/
+.shimmer-restaurants{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem 4%;
+}
+.shimmer-card{
+  padding: 10px;
+  width: 22%;
+  height: 18rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.shimmer-img{
+  height: 60%;
+  width: 100%;
+  background-color: #cacaca;
+}
+.shimmer-info1{
+  height: 8%;
+  width: 75%;
+  background-color: #cacaca;
+}
+.shimmer-info2{
+  height: 8%;
+  width: 60%;
+  background-color: #cacaca;
 }

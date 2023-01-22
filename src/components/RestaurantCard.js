@@ -11,11 +11,15 @@ const RestaurantCard = ({ restaurantInfo }) => {
   return (
     <div className="card">
       <img src={IMG_CDN_URL + cloudinaryImageId} alt={name} />
-      <h2>{name}</h2>
-      <h3>{cuisines.join(",")}</h3>
-      <h4>{avgRating}</h4>
-      <h4>{deliveryTime}</h4>
-      <h4>{costForTwoString}</h4>
+      <div className="card-details">
+        <h6 className="restaurant-name">{name}</h6>
+        <p className="cuisines">{cuisines.join(", ")}</p>
+        <div>
+          <p>{avgRating}</p>
+          <p>{deliveryTime}</p>
+          <p>{costForTwoString}</p>
+        </div>
+      </div>
     </div>
   );
 };
