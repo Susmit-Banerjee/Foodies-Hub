@@ -40,6 +40,8 @@
   align-items: center;
   font-size: large;
   column-gap: 10px;
+  text-decoration: none;
+  color: #747474;
 }
 .nav-icon:hover {
   color: #ffc300;
@@ -96,6 +98,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+  text-decoration: none;
+}
+.card:hover{
+  border: 1px solid rgb(166, 166, 173);
 }
 .card > img {
   width: 100%;
@@ -104,28 +110,58 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 .restaurant-name {
   font-size: large;
   font-weight: bold;
   word-spacing: 2px;
-  min-height: 30%;
   display: flex;
   align-items: center;
+  color: rgb(68, 68, 68);
 }
 .cuisines {
   color: #686b78;
   font-size: medium;
-  min-height: 50%;
   display: flex;
   align-items: center;
 }
 .card-details > div {
   display: flex;
   justify-content: space-between;
-  min-height: 20%;
   align-items: center;
+  color: rgb(68, 68, 68);
+  font-weight: 500;
 }
+
+/********************************************** Restaurand Menu *******************************************************************/
+
+.restaurant-details-container{
+  width: 60%;
+  margin:25px auto;
+}
+.restaurant-details{
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 15%;
+  padding-bottom: 20px;
+  border-bottom: 1.5px dashed #b3b3b3;
+}
+
+.restaurant-info{
+  flex: 1;
+}
+
+.restaurant-img{
+  width: 20%;
+}
+.restaurant-img>img{
+  box-shadow: 2px 2px 5px rgb(170, 169, 169);
+  width: 100%;
+}
+
 
 /********************************************** SHIMMER UI *************************************************************/
 .shimmer-restaurants{

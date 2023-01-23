@@ -1,7 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
-import {SearchSvg} from '../assets/SVG'
+import { SearchSvg } from "../assets/SVG";
 
 const filterDataFn = (searchTxt, restaurants) => {
   const filterData = restaurants.filter((restaurant) =>
@@ -35,6 +35,11 @@ const Body = () => {
     console.log("render");
   }
 
+  // Don't render component (Early return)
+  if (!allRestaurants) {
+    return null;
+  }
+
   return (
     <>
       <div className="search-container">
@@ -51,26 +56,25 @@ const Body = () => {
             const data = filterDataFn(searchTxt, allRestaurants);
             // update the state - restaurants
             setfilteredRestaurants(data);
-            setSearchTxt("");            
+            setSearchTxt("");
             setIsLoading(false);
           }}
         >
-          Search          
+          Search
           <SearchSvg />
         </button>
       </div>
 
-
       {isLoading && <Shimmer />}
 
-      {!isLoading && filteredRestaurants.length === 0 ? (
+      {!isLoading && filteredRestaurants?.length === 0 ? (
         <h3>Not Found!</h3>
       ) : (
         <div className="restaurant-list">
           {filteredRestaurants.map((restaurant) => (
             <RestaurantCard
               restaurantInfo={restaurant}
-              key={restaurant.data.id}
+              key={restaurant?.data?.id}
             />
           ))}
         </div>

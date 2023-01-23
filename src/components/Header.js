@@ -1,5 +1,8 @@
 import logoImg from "../assets/logo-main.png";
-import { SignInSvg, HomeSvg, CartSvg } from "../assets/SVG";
+import { SignInSvg, HomeSvg, CartSvg, Contact, About } from "../assets/SVG";
+import { Link } from "react-router-dom";
+
+
 const Logo = () => (
   <a href="/">
     <img className="logo" src={logoImg} alt="logo"></img>
@@ -12,10 +15,22 @@ const Header = () => (
     <div className="nav-list-items">
       <ul>
         <li>
-          <div className="nav-icon">
+          <Link to='/' className="nav-icon">
             <HomeSvg />
             <span>Home</span>
-          </div>
+          </Link>
+        </li>
+        <li>
+          <Link to='/about' className="nav-icon">
+            <About />
+            <span>About Us</span>
+          </Link>
+        </li>
+        <li>
+          <Link to='/contact' className="nav-icon">
+            <Contact />
+            <span>Contact Us</span>
+          </Link>
         </li>
         <li>
           <div className="nav-icon">
