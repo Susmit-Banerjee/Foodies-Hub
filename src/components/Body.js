@@ -2,19 +2,14 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { SearchSvg } from "../assets/SVG";
+import { filterDataFn } from "../utils/utils";
+import useOnline from "../hooks/useOnline";
 
-const filterDataFn = (searchTxt, restaurants) => {
-  const filterData = restaurants.filter((restaurant) =>
-    restaurant.data.name.toLowerCase().includes(searchTxt.toLowerCase())
-  );
-  return filterData;
-};
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setfilteredRestaurants] = useState([]);
   const [searchTxt, setSearchTxt] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getRestaurants();
@@ -28,14 +23,18 @@ const Body = () => {
     console.log(json);
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards); // * ***optional chaining********
     setfilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setIsLoading(false);
   }
 
   {
     console.log("render");
   }
 
-  // Don't render component (Early return)
+  const online= useOnline();
+  if(!online){
+    return <h1>🔴 Offline, please check your internet connection</h1>
+  }
+
+  //* Don't render component (Early return)
   if (!allRestaurants) {
     return null;
   }
@@ -57,7 +56,6 @@ const Body = () => {
             // update the state - restaurants
             setfilteredRestaurants(data);
             setSearchTxt("");
-            setIsLoading(false);
           }}
         >
           Search
@@ -65,10 +63,8 @@ const Body = () => {
         </button>
       </div>
 
-      {isLoading && <Shimmer />}
-
-      {!isLoading && filteredRestaurants?.length === 0 ? (
-        <h3>Not Found!</h3>
+      {allRestaurants?.length === 0 ? (
+        <Shimmer />
       ) : (
         <div className="restaurant-list">
           {filteredRestaurants.map((restaurant) => (

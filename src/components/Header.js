@@ -1,5 +1,5 @@
 import logoImg from "../assets/logo-main.png";
-import { SignInSvg, HomeSvg, CartSvg, Contact, About } from "../assets/SVG";
+import { SignInSvg, HomeSvg, CartSvg, Contact, About, InstamartSvg } from "../assets/SVG";
 import { Link } from "react-router-dom";
 
 
@@ -18,6 +18,12 @@ const Header = () => (
           <Link to='/' className="nav-icon">
             <HomeSvg />
             <span>Home</span>
+          </Link>
+        </li>
+        <li>
+          <Link to='/instamart' className="nav-icon">
+            <InstamartSvg />
+            <span>Instamart</span>
           </Link>
         </li>
         <li>
